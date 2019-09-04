@@ -1,0 +1,29 @@
+version: '3.6'
+
+services:
+  web:
+    build: .
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: puma
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres@db
+    networks:
+      - ebk-compose_elk
+
+  db:
+    image: postgres:10.3-alpine
+    #    volumes:
+            #- ./dbconf/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+        #      - ./dblog:/var/lib/postgresql/data/dblog
+    networks:
+      - ebk-compose_elk
+
+networks:
+  ebk-compose_elk:
+    external: true
