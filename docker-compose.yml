@@ -18,9 +18,11 @@ services:
 
   db:
     image: postgres:10.3-alpine
-    #    volumes:
-            #- ./dbconf/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+    volumes:
+      - ./dbconf/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
         #      - ./dblog:/var/lib/postgresql/data/dblog
+    environment:
+      - PGDATA=/tmp
     networks:
       - ebk-compose_elk
 
