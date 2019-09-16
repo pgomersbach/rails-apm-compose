@@ -1,6 +1,14 @@
 version: '3.6'
 
 services:
+
+  mongo:
+    image: mongo
+    ports:
+      - 8081:8081
+    networks:
+      - ebk-compose_elk
+
   rabbitmq:
     image: rabbitmq:management
     ports:
